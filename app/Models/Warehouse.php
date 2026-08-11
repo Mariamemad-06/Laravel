@@ -10,4 +10,8 @@ class Warehouse extends Model
         'name',
         'location',
     ];
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
 }
