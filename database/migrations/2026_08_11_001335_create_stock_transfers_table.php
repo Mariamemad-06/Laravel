@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stock_transfers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-             $table->foreignId('from_warehouse_id')->constrained('warehouses');
+            $table->foreignId('from_warehouse_id')->constrained('warehouses');
             $table->foreignId('to_warehouse_id')->constrained('warehouses');
             $table->integer('quantity');
             $table->text('notes');
