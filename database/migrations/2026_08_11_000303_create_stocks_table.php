@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('warehouse_id')->constrained('warehouses');
             $table->integer('quantity');
+            $table->unique(['product_id', 'warehouse_id']);
+            $table->timestamps();
         });
     }
 

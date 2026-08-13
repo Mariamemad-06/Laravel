@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('to_warehouse_id')->constrained('warehouses');
             $table->integer('quantity');
             $table->text('notes');
+            $table->timestamps();
         });
     }
 
