@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('warehouse_id')->constrained('warehouses');
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity');
             $table->unique(['product_id', 'warehouse_id']);
             $table->timestamps();
         });
