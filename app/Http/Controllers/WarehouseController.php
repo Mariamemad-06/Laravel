@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\WarehouseRequest;
+use App\Http\Resources\WarehouseResource;
 
 use Illuminate\Http\Request;
 use App\Models\Warehouse;
@@ -10,27 +12,22 @@ class WarehouseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $warehouse = Warehouse::paginate(10);
-        return $warehouse;
-        }
+        return WarehouseResource::collection(
+        Warehouse::paginate(10)
+    );
+     }
 
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(WarehouseRequest $request)
     {
-         $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'nullable|string',
-        ]);
-        $warehouse = Warehouse::create($request->all());
-        return response()->json([
-            'message' => 'Warehouse created successfully',
-            'warehouse' => $warehouse
-        ]);
+        $warehouse=warehouse::create($request->validated());
+
+        return new WarehouseResource($warehouse);
         //
     }
 
@@ -39,28 +36,17 @@ class WarehouseController extends Controller
      */
     public function show(Warehouse $warehouse)
     {
-        return $warehouse;
+        return new WarehouseResource($warehouse);
         }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(WarehouseRequest $request, Warehouse $warehouse)
     {
-        $warehouse = Warehouse::findOrFail($id);
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'nullable|string',
-        ]);
-
-        $warehouse->update($request->all());
-
-        return response()->json([
-            'message' => 'Warehouse updated successfully',
-            'warehouse' => $warehouse
-        ]);
+       $warehouse->update($request->validated());
+       return new WarehouseResource($warehouse);
     }
 
     /**
