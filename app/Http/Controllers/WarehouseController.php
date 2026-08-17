@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Warehouse ;
+use App\Models\Warehouse;
 
 class WarehouseController extends Controller
 {
@@ -14,7 +14,8 @@ class WarehouseController extends Controller
     {
         $warehouse = Warehouse::paginate(10);
         return $warehouse;
-    }
+        }
+
 
     /**
      * Store a newly created resource in storage.
@@ -30,6 +31,7 @@ class WarehouseController extends Controller
             'message' => 'Warehouse created successfully',
             'warehouse' => $warehouse
         ]);
+        //
     }
 
     /**
@@ -38,7 +40,8 @@ class WarehouseController extends Controller
     public function show(Warehouse $warehouse)
     {
         return $warehouse;
-    }
+        }
+
 
     /**
      * Update the specified resource in storage.
@@ -59,7 +62,7 @@ class WarehouseController extends Controller
             'warehouse' => $warehouse
         ]);
     }
-   
+
     /**
      * Remove the specified resource from storage.
      */
@@ -70,5 +73,6 @@ class WarehouseController extends Controller
         return response()->json([
             'message' => 'Warehouse deleted successfully',
         ]);
-    }
+        }
+
 }
