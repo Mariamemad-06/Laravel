@@ -20,13 +20,15 @@ Route::post('/products', [ProductController::class, 'store']);
 Route::put('/products/{id}',[ProductController::class,'update']);
 Route::delete('/products',[ProductController::class,'delete']);
 
-Route::get('/warehouses', [WarehouseController::class, 'index']);
-Route::post('/warehouses', [WarehouseController::class,'store']);
-Route::put('/warehouses/{id}', [WarehouseController::class,'update']);
-Route::get('/warehouses/{id}', [WarehouseController::class,'show']);
-Route::delete('/warehouses/{id}', [WarehouseController::class,'destroy']);
+// Route::get('/warehouses', [WarehouseController::class, 'index']);
+// Route::post('/warehouses', [WarehouseController::class,'store']);
+// Route::put('/warehouses/{id}', [WarehouseController::class,'update']);
+// Route::get('/warehouses/{id}', [WarehouseController::class,'show']);
+// Route::delete('/warehouses/{id}', [WarehouseController::class,'destroy']);
 //
 
-Route::post('/register',AuthController::class,'register');
-Route::post('/login',AuthController::class,'login');
-Route::post('/logout',AuthController::class,'logout')->middleware('auth:sanctum');
+Route::post('/register',[AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
+Route::get('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
+
+

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StockTransferRequest;
+use App\Http\Resources\StockTransferResource;
+use App\Models\StockTransfer;
 use Illuminate\Http\Request;
 
 class StockTransferController extends Controller
@@ -11,54 +13,47 @@ class StockTransferController extends Controller
      */
     public function index()
     {
-        //
+        return StockTransferResource::collection(
+            StockTransfer::paginate(10)
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StockTransferRequest $request)
     {
-        //
+        $stockTransfer = StockTransfer::create($request->validated());
+        return new StockTransferResource($stockTransfer);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(StockTransfer $stockTransfer)
     {
-        //
+        return new StockTransferResource($stockTransfer);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StockTransferRequest $request, StockTransfer $stockTransfer)
     {
-        //
+        $stockTransfer->update($request->validated());
+        return new StockTransferResource($stockTransfer);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(StockTransfer $stockTransfer)
     {
-        //
+        $stockTransfer->delete();
+         return response()->json([
+            'message' => 'Stock deleted successfully',
+        ]);
     }
 }
