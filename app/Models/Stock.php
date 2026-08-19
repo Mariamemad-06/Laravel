@@ -7,17 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     protected $fillable = [
-        'product_id',
+        'ingredient_id',
         'warehouse_id',
         'quantity',
+        'low_stock_alert_sent',
     ];
     public function warehouse()
 {
     return $this->belongsTo(Warehouse::class);
 }
 
-public function product()
+ public function ingredient()
 {
-    return $this->belongsTo(Product::class);
+    return $this->belongsTo(Ingredient::class);
 }
 }
