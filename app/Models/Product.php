@@ -12,12 +12,13 @@ class Product extends Model
         'price',
         'description',
     ];
-    public function stocks()
-{
-    return $this->hasMany(Stock::class);
-}
+
 public function stockTransfers()
 {
     return $this->hasMany(StockTransfer::class);
+}
+public function ingredients()
+{
+    return $this->belongsToMany(Ingredient::class,'product_ingredients')->withPivot('quantity');
 }
 }
