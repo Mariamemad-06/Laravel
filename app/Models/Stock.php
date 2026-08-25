@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     protected $fillable = [
-        'ingredient_id',
         'warehouse_id',
         'quantity',
         'low_stock_alert_sent',
@@ -17,8 +16,8 @@ class Stock extends Model
     return $this->belongsTo(Warehouse::class);
 }
 
- public function ingredient()
+ public function ingredients()
 {
-    return $this->belongsTo(Ingredient::class);
+    return $this->hasMany(Ingredient::class);
 }
 }

@@ -9,10 +9,11 @@ class Ingredient extends Model
     protected $fillable = [
         'name',
         'initial_quantity',
+        'stock_id',
     ];
-     public function stocks()
+     public function stock()
     {
-        return $this->hasMany(Stock::class);
+        return $this->belongsTo(Stock::class);
     }
     public function products()
     {

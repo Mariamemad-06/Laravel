@@ -26,6 +26,7 @@ class OrderRequest extends FormRequest
             'order_items' => 'required|array',
             'order_items.*.product_id' => 'required|exists:products,id',
             'order_items.*.quantity' => 'required|integer|min:1',
+            'stock_id' => 'required|integer|exists:stocks,id',
 
         ];
     }
